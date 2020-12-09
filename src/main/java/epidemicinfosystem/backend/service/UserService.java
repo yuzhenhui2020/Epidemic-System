@@ -1,5 +1,6 @@
 package epidemicinfosystem.backend.service;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import epidemicinfosystem.backend.bean.User;
 import epidemicinfosystem.backend.mapper.UserMapper;
 import epidemicinfosystem.backend.util.JWTUtils;
@@ -7,6 +8,8 @@ import epidemicinfosystem.backend.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -69,6 +72,27 @@ public class UserService {
             result.setMsg(e.getMessage());
             e.printStackTrace();
         }
+        return result;
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
+    public Result getSecureQuestion(HttpServletRequest request)
+    {
+
+        Result result=new Result();
+        String token=request.getHeader("token");
+
+        result.setDetail(token);
+        DecodedJWT verify=JWTUtils.decode(token);
+
+        String userName=verify.getClaim("userName").asString();
+
+        //result.setDetail(userName);
+        result.setDetail(userMapper.getSecureQuestion(userName));
         return result;
     }
 }

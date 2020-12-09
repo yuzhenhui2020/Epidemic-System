@@ -25,14 +25,14 @@ public class JWTUtils {
     public static DecodedJWT decode(String token)
     {
 
-        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256("Great")).build();
+        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(SIGN)).build();
         DecodedJWT verify=jwtVerifier.verify(token);
         return verify;
     }
     public static Boolean verify(String token)
     {
         try{
-        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256("Great")).build();
+        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(SIGN)).build();
         DecodedJWT verify=jwtVerifier.verify(token);
         return true;
         }

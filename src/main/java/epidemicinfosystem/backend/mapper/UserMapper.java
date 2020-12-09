@@ -20,6 +20,9 @@ public interface UserMapper {
 
     @Select("select usr_id from user where usr_name = #{usr_name} and password = #{password}")
     Integer login(User user);
+
+    @Select("select secure_question from user where usr_name=#{userName}")
+    String getSecureQuestion(String userName);
 }
 
 

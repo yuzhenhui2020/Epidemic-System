@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -24,6 +26,11 @@ public class UserController {
     public Result login(User user)
     {
         return userService.login(user);
+    }
+
+    @RequestMapping("/getSecureQuestion")
+    public Result getSecureQuestion(HttpServletRequest request){
+        return userService.getSecureQuestion(request);
     }
 
 }
