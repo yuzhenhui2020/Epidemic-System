@@ -2,10 +2,12 @@ package epidemicinfosystem.backend.service;
 
 import epidemicinfosystem.backend.bean.User;
 import epidemicinfosystem.backend.mapper.UserMapper;
+import epidemicinfosystem.backend.util.JWTUtils;
 import epidemicinfosystem.backend.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
@@ -47,15 +49,21 @@ public class UserService {
         Result result = new Result();
         result.setSuccess(false);
         result.setDetail(null);
+        String token;
         try {
             Integer userId= userMapper.login(user);
             if(userId == null){
                 result.setMsg("用户名或密码错误");
             }else{
+
+
+                token= JWTUtils.getToke(user.getUsr_name());
+
                 result.setMsg("登录成功");
                 result.setSuccess(true);
                 user.setUsr_id(userId);
-                result.setDetail(user);
+                result.setDetail(token);
+                return result;
             }
         } catch (Exception e) {
             result.setMsg(e.getMessage());
