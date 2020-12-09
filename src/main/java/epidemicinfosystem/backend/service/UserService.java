@@ -75,12 +75,36 @@ public class UserService {
         return result;
     }
 
+    public Result getSecureQuestion(User user)
+    {
+        Result result=new Result();
+        result.setSuccess(false);
+        result.setDetail(null);
+        try{
+            User usr=userMapper.findUserByName(user.getUsr_name());
+            if(usr!=null) {
+                String secureQuestion;
+                secureQuestion = userMapper.getSecureQuestion(user);
+                result.setDetail(secureQuestion);
+                result.setSuccess(true);
+            }
+            else
+            {
+                result.setSuccess(false);
+                result.setMsg("不存在该用户");
+            }
+        }catch(Exception e)
+        {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
     /**
      *
      * @param request
      * @return
      */
-    public Result getSecureQuestion(HttpServletRequest request)
+    /*public Result getSecureQuestion(HttpServletRequest request)
     {
 
         Result result=new Result();
@@ -95,6 +119,8 @@ public class UserService {
         result.setDetail(userMapper.getSecureQuestion(userName));
         return result;
     }
+    */
+
 }
 
 

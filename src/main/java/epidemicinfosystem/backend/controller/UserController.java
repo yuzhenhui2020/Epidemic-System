@@ -29,8 +29,14 @@ public class UserController {
     }
 
     @RequestMapping("/getSecureQuestion")
-    public Result getSecureQuestion(HttpServletRequest request){
-        return userService.getSecureQuestion(request);
+    public Result getSecureQuestion(User user)
+    {
+        return userService.getSecureQuestion(user);
     }
+
+    //@RequestMapping("/getSecureQuestion")
+    //public Result getSecureQuestion(HttpServletRequest request){
+    //    return userService.getSecureQuestion(request);
+    //}
 
 }
