@@ -99,6 +99,28 @@ public class UserService {
         }
         return result;
     }
+
+    public Result changePassword(String userName,String secureAnswerI,String password)
+    {
+        Result result=new Result();
+        result.setSuccess(false);
+        result.setDetail(null);
+
+            String secureAnswer;
+            secureAnswer=userMapper.getSecureAnswer(userName);
+            if(secureAnswerI.equals(secureAnswer)){
+                userMapper.changePassword(userName,password);
+                result.setMsg("成功修改密码");
+                result.setSuccess(true);
+            }
+            else
+            {
+                result.setMsg("安全答案错误");
+            }
+            return result;
+
+    }
+
     /**
      *
      * @param request

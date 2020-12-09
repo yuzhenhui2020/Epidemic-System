@@ -24,6 +24,11 @@ public interface UserMapper {
     @Select("select secure_question from user where usr_name=#{usr_name}")
     String getSecureQuestion(User user);
 
+    @Select("select secure_answer from user where usr_name=#{userName}")
+    String getSecureAnswer(String userName);
+
+    @Update("update user set password=#{password} where usr_name=#{userName}")
+    void changePassword(String userName,String password);
 
 }
 

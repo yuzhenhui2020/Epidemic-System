@@ -34,6 +34,11 @@ public class UserController {
         return userService.getSecureQuestion(user);
     }
 
+    @RequestMapping("/changePassword")
+    public Result changePassword(String userName,String secureAnswer,String password)
+    {
+        return userService.changePassword(userName,secureAnswer,password);
+    }
     //@RequestMapping("/getSecureQuestion")
     //public Result getSecureQuestion(HttpServletRequest request){
     //    return userService.getSecureQuestion(request);
