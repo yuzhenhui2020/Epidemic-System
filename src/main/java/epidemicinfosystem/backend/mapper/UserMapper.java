@@ -15,7 +15,7 @@ public interface UserMapper {
                     @Result(property = "password",column = "password")})
     User findUserByName(@Param("username") String username);
 
-    @Insert("insert into user(usr_name,password) values(#{usr_name},#{password})")
+    @Insert("insert into user values(null,#{usr_name},#{password},#{type},null,null,0)")
     void regist(User user);
 
     @Select("select usr_id from user where usr_name = #{usr_name} and password = #{password}")
