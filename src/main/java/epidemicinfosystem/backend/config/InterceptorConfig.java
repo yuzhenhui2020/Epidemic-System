@@ -25,6 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
         excludePath.add("/user/logout"); //登出
         excludePath.add("/user/getSecureQuestion");
         excludePath.add("/user/changePassword");
+        excludePath.add("/condition/setCondition");
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(excludePath);
