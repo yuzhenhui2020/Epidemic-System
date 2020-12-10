@@ -1,6 +1,7 @@
 package epidemicinfosystem.backend.service;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import epidemicinfosystem.backend.bean.DailyCondition;
 import epidemicinfosystem.backend.bean.Position;
 import epidemicinfosystem.backend.bean.User;
 import epidemicinfosystem.backend.mapper.DailyConditionMapper;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.util.List;
 
 @Service
 @Transactional(rollbackFor = RuntimeException.class)
@@ -53,6 +55,36 @@ public class DailyConditionService {
             result.setMsg("您已经进行过健康上报");
         }
 
+        return result;
+    }
+    public Result getCondition(String userName,HttpServletRequest request)
+    {
+        Result result=new Result();
+        result.setMsg(null);
+        result.setSuccess(false);
+        result.setDetail(null);
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.decode(token);
+        String adminName = verify.getClaim("userName").asString();
+        User admin= userMapper.findUserByName(adminName);
+        User user= userMapper.findUserByName(userName);
+        System.out.println(admin);
+        if(admin.getType()==0)
+        {
+            result.setSuccess(false);
+            result.setMsg("you cant access to this API");
+        }
+        else if(user==null)
+        {
+            result.setSuccess(false);
+            result.setMsg("No this user");
+        }
+        else
+        {
+            List<DailyCondition> conditionList=dailyConditionMapper.getCondition(user.getUsr_id());
+            result.setSuccess(true);
+            result.setDetail(conditionList);
+        }
         return result;
     }
 }

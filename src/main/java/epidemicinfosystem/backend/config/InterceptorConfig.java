@@ -26,6 +26,7 @@ public class InterceptorConfig implements WebMvcConfigurer{
         excludePath.add("/user/getSecureQuestion");
         excludePath.add("/user/changePassword");
         excludePath.add("/condition/setCondition");
+        excludePath.add("/condition/getCondition");
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(excludePath);

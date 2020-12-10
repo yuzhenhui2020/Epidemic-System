@@ -64,4 +64,17 @@ public class User {
     public void setPermission(int permission) {
         this.permission = permission;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "usr_id=" + usr_id +
+                ", usr_name='" + usr_name + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                ", secure_question='" + secure_question + '\'' +
+                ", secure_answer='" + secure_answer + '\'' +
+                ", permission=" + permission +
+                '}';
+    }
 }
