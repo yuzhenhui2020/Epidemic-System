@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface DailyConditionMapper {
 
-    @Insert("insert into dailycondition values(#{userId},#{date},#{position},#{state})")
-    void setCondition(int userId, Date date,int position,String state);
+    @Insert("insert into dailyCondition values(#{userName},#{date},#{position},#{state})")
+    void setCondition(String userName, Date date,int position,String state);
 
-    @Select("select * from dailycondition where usr_id=#{userId}")
-    List<DailyCondition> getCondition(int userId);
+    @Select("select * from dailyCondition where userName=#{userName}")
+    List<DailyCondition> getCondition(String userName);
 }

@@ -45,14 +45,13 @@ public class DailyConditionService {
             DecodedJWT verify = JWTUtils.decode(token);
             String userName = verify.getClaim("userName").asString();
 
-            User user = userMapper.findUserByName(userName);
-            dailyConditionMapper.setCondition(user.getUsr_id(), date, positionI, state);
+            dailyConditionMapper.setCondition(userName, date, positionI, state);
             result.setSuccess(true);
             result.setMsg("健康上报成功");
         }catch(Exception e)
         {
             result.setSuccess(false);
-            result.setMsg("您已经进行过健康上报");
+            result.setMsg(e.getMessage());
         }
 
         return result;
@@ -68,7 +67,6 @@ public class DailyConditionService {
         String adminName = verify.getClaim("userName").asString();
         User admin= userMapper.findUserByName(adminName);
         User user= userMapper.findUserByName(userName);
-        System.out.println(admin);
         if(admin.getType()==0)
         {
             result.setSuccess(false);
@@ -81,7 +79,7 @@ public class DailyConditionService {
         }
         else
         {
-            List<DailyCondition> conditionList=dailyConditionMapper.getCondition(user.getUsr_id());
+            List<DailyCondition> conditionList=dailyConditionMapper.getCondition(userName);
             result.setSuccess(true);
             result.setDetail(conditionList);
         }

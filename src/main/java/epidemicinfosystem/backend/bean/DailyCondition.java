@@ -3,17 +3,17 @@ package epidemicinfosystem.backend.bean;
 import java.sql.Date;
 
 public class DailyCondition {
-    private int usr_id;
+    private String userName;
     private Date date;
     private int position;
     private String state;
 
-    public int getUsr_id() {
-        return usr_id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsr_id(int usr_id) {
-        this.usr_id = usr_id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Date getDate() {

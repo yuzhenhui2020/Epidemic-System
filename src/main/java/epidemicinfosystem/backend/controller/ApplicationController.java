@@ -14,10 +14,23 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
-    @RequestMapping("submitApplication")
+    @RequestMapping("/submitApplication")
     public Result submitApplication(HttpServletRequest request)
     {
         return applicationService.submitApplication(request);
     }
+
+    @RequestMapping("/getApplications")
+    public Result getApplications(HttpServletRequest request)
+    {
+        return applicationService.getApplications(request);
+    }
+
+    @RequestMapping("/approveApplication")
+    public Result approveApplication(String userName,HttpServletRequest request)
+    {
+        return applicationService.approveApplication(userName,request);
+    }
+
 
 }

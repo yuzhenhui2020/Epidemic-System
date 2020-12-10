@@ -1,28 +1,36 @@
 package epidemicinfosystem.backend.bean;
 
 public class User {
-    private int usr_id;
-    private String usr_name;
+
+    private String userName;
     private String password;
     private int type;
-    private String secure_question;
-    private String secure_answer;
+    private String secureQuestion;
+    private String secureAnswer;
     private int permission;
 
-    public int getUsr_id() {
-        return usr_id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsr_id(int usr_id) {
-        this.usr_id = usr_id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUsr_name() {
-        return usr_name;
+    public String getSecureQuestion() {
+        return secureQuestion;
     }
 
-    public void setUsr_name(String usr_name) {
-        this.usr_name = usr_name;
+    public void setSecureQuestion(String secureQuestion) {
+        this.secureQuestion = secureQuestion;
+    }
+
+    public String getSecureAnswer() {
+        return secureAnswer;
+    }
+
+    public void setSecureAnswer(String secureAnswer) {
+        this.secureAnswer = secureAnswer;
     }
 
     public String getPassword() {
@@ -41,21 +49,6 @@ public class User {
         this.type = type;
     }
 
-    public String getSecure_question() {
-        return secure_question;
-    }
-
-    public void setSecure_question(String secure_question) {
-        this.secure_question = secure_question;
-    }
-
-    public String getSecure_answer() {
-        return secure_answer;
-    }
-
-    public void setSecure_answer(String secure_answer) {
-        this.secure_answer = secure_answer;
-    }
 
     public int getPermission() {
         return permission;
@@ -65,16 +58,5 @@ public class User {
         this.permission = permission;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "usr_id=" + usr_id +
-                ", usr_name='" + usr_name + '\'' +
-                ", password='" + password + '\'' +
-                ", type=" + type +
-                ", secure_question='" + secure_question + '\'' +
-                ", secure_answer='" + secure_answer + '\'' +
-                ", permission=" + permission +
-                '}';
-    }
+
 }

@@ -24,7 +24,7 @@ public class UserService {
         result.setSuccess(false);
         result.setDetail(null);
         try {
-            User existUser = userMapper.findUserByName(user.getUsr_name());
+            User existUser = userMapper.findUserByName(user.getUserName());
             if(existUser != null){
                 //如果用户名已存在
                 result.setMsg("用户名已存在");
@@ -54,17 +54,16 @@ public class UserService {
         result.setDetail(null);
         String token;
         try {
-            Integer userId= userMapper.login(user);
-            if(userId == null){
+            User userT= userMapper.login(user);
+            if(userT == null){
                 result.setMsg("用户名或密码错误");
             }else{
 
 
-                token= JWTUtils.getToke(user.getUsr_name());
+                token= JWTUtils.getToke(user.getUserName());
 
                 result.setMsg("登录成功");
                 result.setSuccess(true);
-                user.setUsr_id(userId);
                 result.setDetail(token);
                 return result;
             }
@@ -81,7 +80,7 @@ public class UserService {
         result.setSuccess(false);
         result.setDetail(null);
         try{
-            User usr=userMapper.findUserByName(user.getUsr_name());
+            User usr=userMapper.findUserByName(user.getUserName());
             if(usr!=null) {
                 String secureQuestion;
                 secureQuestion = userMapper.getSecureQuestion(user);

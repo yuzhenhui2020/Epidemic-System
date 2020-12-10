@@ -9,31 +9,32 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
 
-    @Select(value = "select usr_id,usr_name,password,type,permission from user where usr_name=#{username}")
+    @Select(value = "select userName,password,type,permission from user where userName=#{userName}")
     @Results
-            ({@Result(property = "usr_name",column = "usr_name"),
+            ({@Result(property = "userName",column = "userName"),
                     @Result(property = "password",column = "password"),
-                    @Result(property = "usr_id",column = "usr_id"),
                     @Result(property = "type",column = "type"),
                     @Result(property = "permission",column = "permission")
             })
-    User findUserByName(@Param("username") String username);
+    User findUserByName(@Param("userName") String userName);
 
-    @Insert("insert into user values(null,#{usr_name},#{password},#{type},#{secure_question},#{secure_answer},0)")
+    @Insert("insert into user values(#{userName},#{password},#{type},#{secureQuestion},#{secureAnswer},0)")
     void regist(User user);
 
-    @Select("select usr_id from user where usr_name = #{usr_name} and password = #{password}")
-    Integer login(User user);
+    @Select("select * from user where userName = #{userName} and password = #{password}")
+    User login(User user);
 
-    @Select("select secure_question from user where usr_name=#{usr_name}")
+    @Select("select secureQuestion from user where userName=#{userName}")
     String getSecureQuestion(User user);
 
-    @Select("select secure_answer from user where usr_name=#{userName}")
+    @Select("select secureAnswer from user where userName=#{userName}")
     String getSecureAnswer(String userName);
 
-    @Update("update user set password=#{password} where usr_name=#{userName}")
+    @Update("update user set password=#{password} where userName=#{userName}")
     void changePassword(String userName,String password);
 
+    @Update("update user set permission=1 where userName=#{userName}")
+    void getPermission(String userName);
 }
 
 
