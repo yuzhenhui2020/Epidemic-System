@@ -27,4 +27,26 @@ public class QuestionAnswerController {
         return questionAnswerService.getQuestions();
     }
 
+    @RequestMapping("/answer")
+    public Result answer(int questionId,String content,HttpServletRequest request)
+    {
+        return questionAnswerService.answer(questionId,content,request);
+    }
+
+    @RequestMapping("/like")
+    public Result like(int questionId,String userName)
+    {
+        return questionAnswerService.like(questionId,userName);
+    }
+    @RequestMapping("/dislike")
+    public Result dislike(int questionId ,String userName)
+    {
+        return questionAnswerService.dislike(questionId,userName);
+    }
+
+    @RequestMapping("/getAnswers")
+    public Result getAnswers(int questionId)
+    {
+        return questionAnswerService.getAnswers(questionId);
+    }
 }

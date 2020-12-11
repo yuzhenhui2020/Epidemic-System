@@ -3,8 +3,8 @@ package epidemicinfosystem.backend.bean;
 public class Answer {
     private int questionId;
     private String userName;
-    private int dislike;
-    private int like;
+    private int dislikes;
+    private int likes;
     private String content;
 
     public int getQuestionId() {
@@ -23,20 +23,20 @@ public class Answer {
         this.userName = userName;
     }
 
-    public int getDislike() {
-        return dislike;
+    public int getDislikes() {
+        return dislikes;
     }
 
-    public void setDislike(int dislike) {
-        this.dislike = dislike;
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
     }
 
-    public int getLike() {
-        return like;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public String getContent() {

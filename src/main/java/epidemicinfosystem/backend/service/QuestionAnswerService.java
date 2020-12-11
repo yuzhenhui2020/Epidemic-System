@@ -1,6 +1,7 @@
 package epidemicinfosystem.backend.service;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import epidemicinfosystem.backend.bean.Answer;
 import epidemicinfosystem.backend.bean.Question;
 import epidemicinfosystem.backend.mapper.AnswerMapper;
 import epidemicinfosystem.backend.mapper.QuestionMapper;
@@ -54,6 +55,78 @@ public class QuestionAnswerService {
             List<Question> questions=questionMapper.getQuestions();
             result.setSuccess(true);
             result.setDetail(questions);
+        }
+        catch(Exception e)
+        {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+    public Result answer(int questionId,String content,HttpServletRequest request)
+    {
+        Result result =new Result();
+        result.setDetail(null);
+        result.setSuccess(false);
+        result.setMsg(null);
+
+        String token = request.getHeader("token");
+        DecodedJWT verify = JWTUtils.decode(token);
+        String userName = verify.getClaim("userName").asString();
+        try{
+            answerMapper.answer(userName,content,questionId);
+            result.setSuccess(true);
+        }
+        catch(Exception e)
+        {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+    public Result like(int questionId,String userName)
+    {
+        Result result =new Result();
+        result.setDetail(null);
+        result.setSuccess(false);
+        result.setMsg(null);
+
+        try{
+            answerMapper.like(questionId,userName);
+            result.setSuccess(true);
+        }
+        catch(Exception e)
+        {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+    public Result dislike(int questionId,String userName)
+    {
+        Result result =new Result();
+        result.setDetail(null);
+        result.setSuccess(false);
+        result.setMsg(null);
+
+        try{
+            answerMapper.dislike(questionId,userName);
+            result.setSuccess(true);
+        }
+        catch(Exception e)
+        {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+    public Result getAnswers(int questionId)
+    {
+        Result result=new Result();
+        result.setMsg(null);
+        result.setSuccess(false);
+        result.setDetail(null);
+
+        try{
+            List<Answer> answers=answerMapper.getAnswers(questionId);
+            result.setSuccess(true);
+            result.setDetail(answers);
         }
         catch(Exception e)
         {
