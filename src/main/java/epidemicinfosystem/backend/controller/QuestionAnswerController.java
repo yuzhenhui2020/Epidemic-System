@@ -15,10 +15,16 @@ public class QuestionAnswerController {
     @Autowired
     private QuestionAnswerService questionAnswerService;
 
-    @RequestMapping("askQuestion")
+    @RequestMapping("/askQuestion")
     public Result askQuestion(String content, String description, HttpServletRequest request)
     {
         return questionAnswerService.askQuestion(content,description,request);
+    }
+
+    @RequestMapping("/getQuestions")
+    public Result getQuestions()
+    {
+        return questionAnswerService.getQuestions();
     }
 
 }

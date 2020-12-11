@@ -23,13 +23,15 @@ public class InterceptorConfig implements WebMvcConfigurer{
         excludePath.add("/user/regist"); //注册
         excludePath.add("/user/login"); //登录
         excludePath.add("/user/logout"); //登出
-        excludePath.add("/user/getSecureQuestion");
+        /*excludePath.add("/user/getSecureQuestion");
         excludePath.add("/user/changePassword");
         excludePath.add("/condition/setCondition");
         excludePath.add("/condition/getCondition");
         excludePath.add("/application/submitCondition");
         excludePath.add("/application/getApplications");
         excludePath.add("/application/approveApplication");
+        excludePath.add("/questionAnswer/askQuestion");
+        excludePath.add("/questionAnswer/getQuestions");*/
         registry.addInterceptor(tokenInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(excludePath);
